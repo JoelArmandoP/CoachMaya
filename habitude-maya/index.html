@@ -11,11 +11,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; background: #0C0B09; color: #EDE8DE; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
     #app { height: 100vh; display: flex; flex-direction: column; background: #0C0B09; }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
-
-    /* ── WELCOME ── */
     .welcome { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 2rem; text-align: center; }
     .w-logo { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 400; letter-spacing: 0.08em; color: #EDE8DE; animation: fadeUp 0.7s ease forwards; }
     .w-tag { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: #C9963C; margin-top: 0.2rem; margin-bottom: 3rem; animation: fadeUp 0.7s 0.15s ease forwards; opacity: 0; }
@@ -25,8 +22,6 @@
     .start-btn { background: #C9963C; color: #0C0B09; border: none; padding: 0.9rem 2.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, transform 0.15s; animation: fadeUp 0.7s 0.45s ease forwards; opacity: 0; }
     .start-btn:hover { background: #D4A843; transform: translateY(-1px); }
     .w-footer { margin-top: 2.5rem; font-size: 0.67rem; color: #2A2520; letter-spacing: 0.05em; animation: fadeUp 0.7s 0.6s ease forwards; opacity: 0; }
-
-    /* ── ONBOARDING ── */
     .onboarding { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 2rem; overflow-y: auto; }
     .ob-inner { width: 100%; max-width: 440px; }
     .ob-logo { text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.5rem; color: #EDE8DE; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
@@ -45,12 +40,10 @@
     .unit-btn { background: #1A1714; border: 1px solid #2A2620; color: #5A5450; padding: 0.78rem 1rem; font-size: 0.82rem; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; transition: all 0.15s; }
     .unit-btn.active { background: #C9963C; color: #0C0B09; border-color: #C9963C; }
     .ob-next { width: 100%; padding: 0.88rem; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: none; cursor: pointer; margin-top: 0.4rem; transition: background 0.2s; }
-    .ob-next.on { background: #C9963C; color: #0C0B09; }
+    .ob-next.on { background: #C9963C; color: #0C0B09; cursor: pointer; }
     .ob-next.off { background: #2A2620; color: #4A4540; cursor: not-allowed; }
     .ob-back { background: none; border: none; color: #4A4540; font-size: 0.82rem; cursor: pointer; padding: 0.45rem 0; margin-top: 0.3rem; font-family: 'DM Sans', sans-serif; width: 100%; text-align: center; transition: color 0.2s; }
     .ob-back:hover { color: #8A8278; }
-
-    /* ── CHAT ── */
     .chat-header { display: flex; align-items: center; justify-content: space-between; background: #0F0E0C; border-bottom: 1px solid #1E1C18; padding: 0.8rem 1.25rem; flex-shrink: 0; }
     .maya-info { display: flex; align-items: center; gap: 0.65rem; }
     .avatar { width: 34px; height: 34px; background: linear-gradient(135deg, #C9963C, #8B6020); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 0.9rem; color: #0C0B09; flex-shrink: 0; }
@@ -101,7 +94,6 @@
 <body>
 <div id="app"></div>
 <input type="file" id="file-input" accept="image/*" style="display:none">
-
 <script>
 const MAYA_SYSTEM = `You are Maya, a warm and expert nutrition coach for habitude — a fitness and personal development coaching brand founded by Joel.
 
@@ -128,7 +120,7 @@ DAILY FOOD PHOTO LOGGING: When a client shares food photos:
 - Comment on meal quality (fibre, micronutrients, satiety)
 - Compare to daily targets if known
 
-END OF DAY SUMMARY (when client says it's end of day):
+END OF DAY SUMMARY (when client says end of day):
 Present a table: | Meal | Calories | Protein | Carbs | Fat |
 Then totals vs targets. Ask about: energy today, sleep last night, training performance.
 
@@ -142,152 +134,130 @@ BUSINESS (mention naturally, never pushy):
 
 Always represent habitude with warmth and professionalism.`;
 
-const GOALS = [
-  { v: "lose_fat", l: "Lose body fat" },
-  { v: "build_muscle", l: "Build muscle / gain weight" },
-  { v: "recomposition", l: "Body recomposition" },
-  { v: "maintain", l: "Maintain current weight" },
-  { v: "performance", l: "Improve athletic performance" },
-];
-const ACTIVITY = [
-  { v: "sedentary", l: "Sedentary (desk job, little exercise)" },
-  { v: "light", l: "Light (1–3 days/week)" },
-  { v: "moderate", l: "Moderate (3–5 days/week)" },
-  { v: "active", l: "Active (6–7 days/week)" },
-  { v: "very_active", l: "Very active (physical job + training)" },
-];
+const GOALS=[{v:"lose_fat",l:"Lose body fat"},{v:"build_muscle",l:"Build muscle / gain weight"},{v:"recomposition",l:"Body recomposition"},{v:"maintain",l:"Maintain current weight"},{v:"performance",l:"Improve athletic performance"}];
+const ACTIVITY=[{v:"sedentary",l:"Sedentary (desk job, little exercise)"},{v:"light",l:"Light (1–3 days/week)"},{v:"moderate",l:"Moderate (3–5 days/week)"},{v:"active",l:"Active (6–7 days/week)"},{v:"very_active",l:"Very active (physical job + training)"}];
 
-function mdToHtml(t) {
-  if (!t) return "";
-  let h = t;
-  h = h.replace(/(\|[^\n]+\|\n?)+/g, tbl => {
-    const rows = tbl.trim().split("\n");
-    if (rows.length < 2) return tbl;
-    const hdr = rows[0].split("|").filter(c => c.trim()).map(c => `<th>${c.trim()}</th>`).join("");
-    const bdy = rows.slice(2).map(r => {
-      const cells = r.split("|").filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join("");
-      return `<tr>${cells}</tr>`;
-    }).join("");
-    return `<div class="tw"><table><thead><tr>${hdr}</tr></thead><tbody>${bdy}</tbody></table></div>`;
+function mdToHtml(t){
+  if(!t)return"";
+  let h=t;
+  h=h.replace(/(\|[^\n]+\|\n?)+/g,tbl=>{
+    const rows=tbl.trim().split("\n");
+    if(rows.length<2)return tbl;
+    const hdr=rows[0].split("|").filter(c=>c.trim()).map(c=>`<th>${c.trim()}</th>`).join("");
+    const bdy=rows.slice(2).map(r=>{const cells=r.split("|").filter(c=>c.trim()).map(c=>`<td>${c.trim()}</td>`).join("");return`<tr>${cells}</tr>`;}).join("");
+    return`<div class="tw"><table><thead><tr>${hdr}</tr></thead><tbody>${bdy}</tbody></table></div>`;
   });
-  h = h.replace(/^### (.+)$/gm, "<h4>$1</h4>");
-  h = h.replace(/^## (.+)$/gm, "<h3>$1</h3>");
-  h = h.replace(/^# (.+)$/gm, "<h2>$1</h2>");
-  h = h.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  h = h.replace(/\*(.+?)\*/g, "<em>$1</em>");
-  h = h.replace(/^[\-\*] (.+)$/gm, "<li>$1</li>");
-  h = h.replace(/^(\d+)\. (.+)$/gm, "<li>$2</li>");
-  h = h.replace(/(<li>.*?<\/li>\n?)+/g, m => `<ul>${m}</ul>`);
-  h = h.replace(/\n\n/g, "</p><p>");
-  h = h.replace(/\n/g, "<br/>");
-  h = "<p>" + h + "</p>";
-  ["h2","h3","h4","ul","div"].forEach(tag => {
-    h = h.replace(new RegExp(`<p>(<${tag}[ >])`, "g"), "$1");
-    h = h.replace(new RegExp(`(</${tag}>)<\\/p>`, "g"), "$1");
+  h=h.replace(/^### (.+)$/gm,"<h4>$1</h4>");
+  h=h.replace(/^## (.+)$/gm,"<h3>$1</h3>");
+  h=h.replace(/^# (.+)$/gm,"<h2>$1</h2>");
+  h=h.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+  h=h.replace(/\*(.+?)\*/g,"<em>$1</em>");
+  h=h.replace(/^[\-\*] (.+)$/gm,"<li>$1</li>");
+  h=h.replace(/^(\d+)\. (.+)$/gm,"<li>$2</li>");
+  h=h.replace(/(<li>.*?<\/li>\n?)+/g,m=>`<ul>${m}</ul>`);
+  h=h.replace(/\n\n/g,"</p><p>");
+  h=h.replace(/\n/g,"<br/>");
+  h="<p>"+h+"</p>";
+  ["h2","h3","h4","ul","div"].forEach(tag=>{
+    h=h.replace(new RegExp(`<p>(<${tag}[ >])`,"g"),"$1");
+    h=h.replace(new RegExp(`(</${tag}>)<\\/p>`,"g"),"$1");
   });
-  h = h.replace(/<p><\/p>/g, "");
+  h=h.replace(/<p><\/p>/g,"");
   return h;
 }
 
-const S = {
-  screen: "welcome",
-  messages: [],
-  input: "",
-  loading: false,
-  pendingImage: null,
-  step: 0,
-  form: { name:"", age:"", sex:"", weight:"", weightUnit:"kg", height:"", goal:"", activityLevel:"", trainingType:"", restrictions:"" },
-};
+const S={screen:"welcome",messages:[],input:"",loading:false,pendingImage:null,step:0,form:{name:"",age:"",sex:"",weight:"",weightUnit:"kg",height:"",goal:"",activityLevel:"",trainingType:"",restrictions:""}};
+const app=document.getElementById("app");
+const fileInput=document.getElementById("file-input");
 
-const app = document.getElementById("app");
-const fileInput = document.getElementById("file-input");
-
-fileInput.onchange = e => {
-  const file = e.target.files[0]; if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => { S.pendingImage = { data: reader.result.split(",")[1], preview: reader.result }; render(); };
+fileInput.onchange=e=>{
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{S.pendingImage={data:reader.result.split(",")[1],preview:reader.result};render();};
   reader.readAsDataURL(file);
-  e.target.value = "";
+  e.target.value="";
 };
 
-async function callMaya(userMsg, history) {
-  S.loading = true; render();
-  try {
-    const apiMsgs = [...history, userMsg].map(({ role, content }) => ({ role, content }));
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ system: MAYA_SYSTEM, messages: apiMsgs }),
-    });
-    const data = await res.json();
-    const reply = data.content?.find(b => b.type === "text")?.text || "I'm here for you!";
-    S.messages = [...history, userMsg, { role: "assistant", content: reply }];
-  } catch (e) {
+function isStepValid(){
+  const f=S.form;
+  return[!!(f.name?.trim()&&f.age&&f.sex),!!(f.weight&&f.goal),!!(f.activityLevel&&f.trainingType?.trim())][S.step];
+}
+
+function collectFields(){
+  const step=S.step;
+  if(step===0){S.form.name=document.getElementById("f-name")?.value||"";S.form.age=document.getElementById("f-age")?.value||"";S.form.sex=document.getElementById("f-sex")?.value||"";}
+  else if(step===1){S.form.weight=document.getElementById("f-weight")?.value||"";S.form.height=document.getElementById("f-height")?.value||"";S.form.goal=document.getElementById("f-goal")?.value||"";}
+  else{S.form.activityLevel=document.getElementById("f-activity")?.value||"";S.form.trainingType=document.getElementById("f-training")?.value||"";S.form.restrictions=document.getElementById("f-rest")?.value||"";}
+}
+
+async function callMaya(userMsg,history){
+  S.loading=true;render();
+  try{
+    const apiMsgs=[...history,userMsg].map(({role,content})=>({role,content}));
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:MAYA_SYSTEM,messages:apiMsgs})});
+    const data=await res.json();
+    const reply=data.content?.find(b=>b.type==="text")?.text||"I'm here for you!";
+    S.messages=[...history,userMsg,{role:"assistant",content:reply}];
+  }catch(e){
     console.error(e);
-    S.messages = [...history, userMsg, { role: "assistant", content: "Something went wrong — please try again." }];
+    S.messages=[...history,userMsg,{role:"assistant",content:"Something went wrong — please try again."}];
   }
-  S.loading = false; render();
-  document.getElementById("msgs-end")?.scrollIntoView({ behavior: "smooth" });
+  S.loading=false;render();
+  document.getElementById("msgs-end")?.scrollIntoView({behavior:"smooth"});
 }
 
-function doSend() {
-  if (S.loading || (!S.input.trim() && !S.pendingImage)) return;
-  const userMsg = S.pendingImage
-    ? { role: "user", content: [{ type: "image", source: { type: "base64", media_type: "image/jpeg", data: S.pendingImage.data } }, { type: "text", text: S.input || "Here's what I had." }], _preview: S.pendingImage.preview }
-    : { role: "user", content: S.input };
-  S.input = ""; S.pendingImage = null;
-  callMaya(userMsg, S.messages);
+function doSend(){
+  if(S.loading||(!S.input.trim()&&!S.pendingImage))return;
+  const userMsg=S.pendingImage
+    ?{role:"user",content:[{type:"image",source:{type:"base64",media_type:"image/jpeg",data:S.pendingImage.data}},{type:"text",text:S.input||"Here's what I had."}],_preview:S.pendingImage.preview}
+    :{role:"user",content:S.input};
+  S.input="";S.pendingImage=null;
+  callMaya(userMsg,S.messages);
 }
 
-function handleOnboarding() {
-  const f = S.form;
-  const txt = `Hi Maya! Here is my profile:\nName: ${f.name}\nAge: ${f.age}\nSex: ${f.sex}\nCurrent weight: ${f.weight} ${f.weightUnit}\nHeight: ${f.height ? f.height + " cm" : "not provided"}\nMain goal: ${f.goal}\nActivity level: ${f.activityLevel}\nTraining type: ${f.trainingType}\nDietary restrictions/preferences: ${f.restrictions || "None"}\n\nPlease create my personalised nutritional programme!`;
-  S.screen = "chat"; S.messages = []; S.step = 0;
-  callMaya({ role: "user", content: txt }, []);
+function handleOnboarding(){
+  const f=S.form;
+  const txt=`Hi Maya! Here is my profile:\nName: ${f.name}\nAge: ${f.age}\nSex: ${f.sex}\nCurrent weight: ${f.weight} ${f.weightUnit}\nHeight: ${f.height?f.height+" cm":"not provided"}\nMain goal: ${f.goal}\nActivity level: ${f.activityLevel}\nTraining type: ${f.trainingType}\nDietary restrictions/preferences: ${f.restrictions||"None"}\n\nPlease create my personalised nutritional programme!`;
+  S.screen="chat";S.messages=[];S.step=0;
+  callMaya({role:"user",content:txt},[]);
 }
 
-function render() {
-  if (S.screen === "welcome") {
-    app.innerHTML = `
+function render(){
+  if(S.screen==="welcome"){
+    app.innerHTML=`
       <div class="welcome">
         <div class="w-logo">habitude</div>
         <div class="w-tag">nutrition coaching</div>
-        <div class="w-card">
-          <h2>Meet Maya</h2>
-          <p>Your personal nutrition coach. She'll create your programme, analyse your food photos, and help you build habits that actually stick — through daily check-ins and weekly reviews.</p>
-        </div>
+        <div class="w-card"><h2>Meet Maya</h2><p>Your personal nutrition coach. She'll create your programme, analyse your food photos, and help you build habits that actually stick — through daily check-ins and weekly reviews.</p></div>
         <button class="start-btn" id="start-btn">Begin your journey</button>
         <div class="w-footer">A habitude product &middot; coaching by Joel</div>
       </div>`;
-    document.getElementById("start-btn").onclick = () => { S.screen = "onboarding"; render(); };
+    document.getElementById("start-btn").onclick=()=>{S.screen="onboarding";render();};
 
-  } else if (S.screen === "onboarding") {
-    const f = S.form; const step = S.step;
-    const valid = [f.name?.trim() && f.age && f.sex, f.weight && f.goal, f.activityLevel && f.trainingType?.trim()][step];
-    let fields = "";
-    if (step === 0) {
-      fields = `
+  }else if(S.screen==="onboarding"){
+    const f=S.form;const step=S.step;const valid=isStepValid();
+    let fields="";
+    if(step===0){
+      fields=`
         <div class="ob-title">Let's get to know you</div>
         <div class="ob-sub">Maya will use this to personalise your programme.</div>
         <div class="ob-field"><label class="ob-label">Your name</label><input class="ob-input" id="f-name" placeholder="e.g. Sarah" value="${f.name}"></div>
         <div class="ob-field"><label class="ob-label">Age</label><input class="ob-input" id="f-age" type="number" placeholder="e.g. 32" value="${f.age}"></div>
         <div class="ob-field"><label class="ob-label">Sex (for calorie calculations)</label>
           <select class="ob-input" id="f-sex"><option value="">Select...</option><option value="female" ${f.sex==="female"?"selected":""}>Female</option><option value="male" ${f.sex==="male"?"selected":""}>Male</option></select></div>`;
-    } else if (step === 1) {
-      fields = `
+    }else if(step===1){
+      fields=`
         <div class="ob-title">Your body &amp; goals</div>
         <div class="ob-sub">Honest numbers help Maya give you accurate targets.</div>
         <div class="ob-field"><label class="ob-label">Current weight</label>
-          <div class="weight-row">
-            <input class="ob-input" id="f-weight" type="number" placeholder="e.g. 65" value="${f.weight}">
-            <button class="unit-btn ${f.weightUnit==='kg'?'active':''}" id="btn-kg">kg</button>
-            <button class="unit-btn ${f.weightUnit==='lbs'?'active':''}" id="btn-lbs">lbs</button>
-          </div></div>
+          <div class="weight-row"><input class="ob-input" id="f-weight" type="number" placeholder="e.g. 65" value="${f.weight}">
+          <button class="unit-btn ${f.weightUnit==='kg'?'active':''}" id="btn-kg">kg</button>
+          <button class="unit-btn ${f.weightUnit==='lbs'?'active':''}" id="btn-lbs">lbs</button></div></div>
         <div class="ob-field"><label class="ob-label">Height (cm)</label><input class="ob-input" id="f-height" type="number" placeholder="e.g. 165" value="${f.height}"></div>
         <div class="ob-field"><label class="ob-label">Your main goal</label>
           <select class="ob-input" id="f-goal"><option value="">Select...</option>${GOALS.map(g=>`<option value="${g.v}" ${f.goal===g.v?"selected":""}>${g.l}</option>`).join("")}</select></div>`;
-    } else {
-      fields = `
+    }else{
+      fields=`
         <div class="ob-title">Lifestyle &amp; training</div>
         <div class="ob-sub">Almost there. Helps Maya calculate your calorie needs accurately.</div>
         <div class="ob-field"><label class="ob-label">Activity level</label>
@@ -295,48 +265,40 @@ function render() {
         <div class="ob-field"><label class="ob-label">Type of training</label><input class="ob-input" id="f-training" placeholder="e.g. powerlifting, yoga, running..." value="${f.trainingType}"></div>
         <div class="ob-field"><label class="ob-label">Dietary restrictions / preferences (optional)</label><input class="ob-input" id="f-rest" placeholder="e.g. vegetarian, no dairy, love pasta..." value="${f.restrictions}"></div>`;
     }
-    app.innerHTML = `
-      <div class="onboarding">
-        <div class="ob-inner">
-          <div class="ob-logo">habitude</div>
-          <div class="ob-progress"><div class="ob-bar" style="width:${((step+1)/3)*100}%"></div></div>
-          ${fields}
-          <button class="ob-next ${valid?'on':'off'}" id="ob-next">${step < 2 ? "Continue →" : "Meet Maya →"}</button>
-          ${step > 0 ? `<button class="ob-back" id="ob-back">← Back</button>` : ""}
-        </div>
-      </div>`;
 
-    const collect = () => {
-      if (step===0) { S.form.name=document.getElementById("f-name")?.value||""; S.form.age=document.getElementById("f-age")?.value||""; S.form.sex=document.getElementById("f-sex")?.value||""; }
-      else if (step===1) { S.form.weight=document.getElementById("f-weight")?.value||""; S.form.height=document.getElementById("f-height")?.value||""; S.form.goal=document.getElementById("f-goal")?.value||""; }
-      else { S.form.activityLevel=document.getElementById("f-activity")?.value||""; S.form.trainingType=document.getElementById("f-training")?.value||""; S.form.restrictions=document.getElementById("f-rest")?.value||""; }
-    };
-    document.getElementById("ob-next").onclick = () => { collect(); if (!valid) return; if (step < 2) { S.step++; render(); } else { handleOnboarding(); } };
-    document.getElementById("ob-back")?.addEventListener("click", () => { S.step--; render(); });
-    document.getElementById("btn-kg")?.addEventListener("click", () => { S.form.weightUnit="kg"; render(); });
-    document.getElementById("btn-lbs")?.addEventListener("click", () => { S.form.weightUnit="lbs"; render(); });
+    app.innerHTML=`
+      <div class="onboarding"><div class="ob-inner">
+        <div class="ob-logo">habitude</div>
+        <div class="ob-progress"><div class="ob-bar" style="width:${((step+1)/3)*100}%"></div></div>
+        ${fields}
+        <button class="ob-next ${valid?'on':'off'}" id="ob-next">${step<2?"Continue →":"Meet Maya →"}</button>
+        ${step>0?`<button class="ob-back" id="ob-back">← Back</button>`:""}
+      </div></div>`;
 
-  } else {
-    const canSend = !S.loading && (S.input.trim() || S.pendingImage);
-    const msgsHtml = S.messages.map(m => {
-      const isMaya = m.role === "assistant";
-      const text = typeof m.content === "string" ? m.content : (m.content.find?.(b => b.type === "text")?.text || "");
-      const preview = m._preview || null;
-      if (isMaya) {
-        return `<div class="msg-maya"><div class="avatar sm">M</div><div class="bubble-maya">${mdToHtml(text)}</div></div>`;
-      } else {
-        return `<div class="msg-user"><div>${preview ? `<img class="msg-img" src="${preview}">` : ""}${text ? `<div class="bubble-user">${text}</div>` : ""}</div></div>`;
-      }
+    document.querySelectorAll('.ob-input').forEach(el=>{
+      el.addEventListener('input',()=>{collectFields();document.getElementById('ob-next').className='ob-next '+(isStepValid()?'on':'off');});
+      el.addEventListener('change',()=>{collectFields();document.getElementById('ob-next').className='ob-next '+(isStepValid()?'on':'off');});
+    });
+    document.getElementById("ob-next").onclick=()=>{collectFields();if(!isStepValid())return;if(S.step<2){S.step++;render();}else{handleOnboarding();}};
+    document.getElementById("ob-back")?.addEventListener("click",()=>{S.step--;render();});
+    document.getElementById("btn-kg")?.addEventListener("click",()=>{S.form.weightUnit="kg";render();});
+    document.getElementById("btn-lbs")?.addEventListener("click",()=>{S.form.weightUnit="lbs";render();});
+
+  }else{
+    const canSend=!S.loading&&(S.input.trim()||S.pendingImage);
+    const msgsHtml=S.messages.map(m=>{
+      const isMaya=m.role==="assistant";
+      const text=typeof m.content==="string"?m.content:(m.content.find?.(b=>b.type==="text")?.text||"");
+      const preview=m._preview||null;
+      if(isMaya)return`<div class="msg-maya"><div class="avatar sm">M</div><div class="bubble-maya">${mdToHtml(text)}</div></div>`;
+      return`<div class="msg-user"><div>${preview?`<img class="msg-img" src="${preview}">`:""}${text?`<div class="bubble-user">${text}</div>`:""}</div></div>`;
     }).join("");
-    const loadingHtml = S.loading ? `<div class="msg-maya"><div class="avatar sm">M</div><div class="bubble-maya"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>` : "";
-    const previewHtml = S.pendingImage ? `<div class="preview-bar"><img src="${S.pendingImage.preview}"><span>Photo ready to send</span><button id="clear-img">&times;</button></div>` : "";
+    const loadingHtml=S.loading?`<div class="msg-maya"><div class="avatar sm">M</div><div class="bubble-maya"><div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>`:"";
+    const previewHtml=S.pendingImage?`<div class="preview-bar"><img src="${S.pendingImage.preview}"><span>Photo ready to send</span><button id="clear-img">&times;</button></div>`:"";
 
-    app.innerHTML = `
+    app.innerHTML=`
       <div class="chat-header">
-        <div class="maya-info">
-          <div class="avatar">M</div>
-          <div><div class="maya-name">Maya</div><div class="maya-role">Nutrition Coach</div></div>
-        </div>
+        <div class="maya-info"><div class="avatar">M</div><div><div class="maya-name">Maya</div><div class="maya-role">Nutrition Coach</div></div></div>
         <div class="h-logo">habitude</div>
       </div>
       <div class="messages" id="messages">${msgsHtml}${loadingHtml}<div id="msgs-end"></div></div>
@@ -353,13 +315,12 @@ function render() {
       </div>`;
 
     document.getElementById("msgs-end")?.scrollIntoView();
-    document.getElementById("ob-next").onclick = () => {collect(); const f = S.form; const step = S.step; const isValid = [f.name?.trim() && f.age && f.sex, f.weight && f.goal, f.activityLevel && f.trainingType?.trim()][step]; if (!isValid) return;
-    document.getElementById("photo-btn").onclick = () => fileInput.click();
-    document.getElementById("clear-img")?.addEventListener("click", () => { S.pendingImage = null; render(); });
-    document.getElementById("send-btn").onclick = doSend;
-    const ta = document.getElementById("chat-ta");
-    ta.oninput = e => { S.input = e.target.value; document.getElementById("send-btn").className = `send-btn ${!S.loading && (S.input.trim() || S.pendingImage) ? 'on' : 'off'}`; };
-    ta.onkeydown = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); doSend(); } };
+    document.getElementById("photo-btn").onclick=()=>fileInput.click();
+    document.getElementById("clear-img")?.addEventListener("click",()=>{S.pendingImage=null;render();});
+    document.getElementById("send-btn").onclick=doSend;
+    const ta=document.getElementById("chat-ta");
+    ta.oninput=e=>{S.input=e.target.value;document.getElementById("send-btn").className=`send-btn ${!S.loading&&(S.input.trim()||S.pendingImage)?'on':'off'}`;};
+    ta.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();doSend();}};
   }
 }
 
