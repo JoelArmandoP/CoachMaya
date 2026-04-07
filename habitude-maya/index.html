@@ -353,6 +353,7 @@ function render() {
       </div>`;
 
     document.getElementById("msgs-end")?.scrollIntoView();
+    document.getElementById("ob-next").onclick = () => {collect(); const f = S.form; const step = S.step; const isValid = [f.name?.trim() && f.age && f.sex, f.weight && f.goal, f.activityLevel && f.trainingType?.trim()][step]; if (!isValid) return;
     document.getElementById("photo-btn").onclick = () => fileInput.click();
     document.getElementById("clear-img")?.addEventListener("click", () => { S.pendingImage = null; render(); });
     document.getElementById("send-btn").onclick = doSend;
