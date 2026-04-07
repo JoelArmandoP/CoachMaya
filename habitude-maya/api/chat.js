@@ -16,9 +16,11 @@ export default async function handler(req, res) {
         'x-api-key': process.env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1024, system, messages }),
+      body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 1024, system, messages }),
     });
     const data = await response.json();
+    console.log('Anthropic status:', response.status);
+    if (!response.ok) console.error('Anthropic error:', JSON.stringify(data));
     return res.status(response.status).json(data);
   } catch (error) {
     console.error('API error:', error);
